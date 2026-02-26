@@ -1,4 +1,4 @@
-import { awscdk, javascript } from 'projen';
+import { awscdk, javascript, github } from 'projen';
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'yicr',
   authorAddress: 'yicr@users.noreply.github.com',
@@ -36,9 +36,19 @@ const project = new awscdk.AwsCdkConstructLibrary({
       schedule: javascript.UpgradeDependenciesSchedule.WEEKLY,
     },
   },
+  githubOptions: {
+    projenCredentials: github.GithubCredentials.fromApp({
+      permissions: {
+        pullRequests: github.workflows.AppPermission.WRITE,
+        contents: github.workflows.AppPermission.WRITE,
+      },
+    }),
+  },
   autoApproveOptions: {
-    secret: 'GITHUB_TOKEN',
-    allowedUsernames: ['yicr'],
+    allowedUsernames: [
+      'gammarers-projen-upgrade-bot[bot]',
+      'yicr',
+    ],
   },
   // publishToPypi: {
   //   distName: 'gammarers.aws-rds-database-running-schedule-stack',
