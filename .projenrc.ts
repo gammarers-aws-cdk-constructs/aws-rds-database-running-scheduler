@@ -59,4 +59,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   //   packageId: 'Gammarers.CDK.AWS.RdsDatabaseRunningScheduleStack',
   // },
 });
+// package ignore .devcontainer directory
+project.addPackageIgnore('/.devcontainer');
+// synth the project
 project.synth();
