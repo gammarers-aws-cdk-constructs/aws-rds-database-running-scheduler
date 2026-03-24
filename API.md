@@ -4,6 +4,8 @@
 
 ### RDSDatabaseRunningScheduler <a name="RDSDatabaseRunningScheduler" id="aws-rds-database-running-scheduler.RDSDatabaseRunningScheduler"></a>
 
+CDK construct that provisions a durable Lambda workflow and EventBridge schedules to start/stop tagged RDS databases and clusters.
+
 #### Initializers <a name="Initializers" id="aws-rds-database-running-scheduler.RDSDatabaseRunningScheduler.Initializer"></a>
 
 ```typescript
@@ -14,9 +16,9 @@ new RDSDatabaseRunningScheduler(scope: Construct, id: string, props: RDSDatabase
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduler.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduler.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduler.Initializer.parameter.props">props</a></code> | <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningSchedulerProps">RDSDatabaseRunningSchedulerProps</a></code> | *No description.* |
+| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduler.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | Parent construct scope. |
+| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduler.Initializer.parameter.id">id</a></code> | <code>string</code> | Construct identifier. |
+| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduler.Initializer.parameter.props">props</a></code> | <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningSchedulerProps">RDSDatabaseRunningSchedulerProps</a></code> | Scheduler configuration. |
 
 ---
 
@@ -24,17 +26,23 @@ new RDSDatabaseRunningScheduler(scope: Construct, id: string, props: RDSDatabase
 
 - *Type:* constructs.Construct
 
+Parent construct scope.
+
 ---
 
 ##### `id`<sup>Required</sup> <a name="id" id="aws-rds-database-running-scheduler.RDSDatabaseRunningScheduler.Initializer.parameter.id"></a>
 
 - *Type:* string
 
+Construct identifier.
+
 ---
 
 ##### `props`<sup>Required</sup> <a name="props" id="aws-rds-database-running-scheduler.RDSDatabaseRunningScheduler.Initializer.parameter.props"></a>
 
 - *Type:* <a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningSchedulerProps">RDSDatabaseRunningSchedulerProps</a>
+
+Scheduler configuration.
 
 ---
 
@@ -139,6 +147,8 @@ The tree node.
 
 ### RDSDatabaseRunningScheduleStack <a name="RDSDatabaseRunningScheduleStack" id="aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStack"></a>
 
+CDK stack that provisions scheduled start/stop control for tagged RDS resources.
+
 #### Initializers <a name="Initializers" id="aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStack.Initializer"></a>
 
 ```typescript
@@ -149,9 +159,9 @@ new RDSDatabaseRunningScheduleStack(scope: Construct, id: string, props: RDSData
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStack.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStack.Initializer.parameter.props">props</a></code> | <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStackProps">RDSDatabaseRunningScheduleStackProps</a></code> | *No description.* |
+| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStack.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | Parent construct scope. |
+| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStack.Initializer.parameter.id">id</a></code> | <code>string</code> | Stack identifier. |
+| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStack.Initializer.parameter.props">props</a></code> | <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStackProps">RDSDatabaseRunningScheduleStackProps</a></code> | Stack configuration. |
 
 ---
 
@@ -159,17 +169,23 @@ new RDSDatabaseRunningScheduleStack(scope: Construct, id: string, props: RDSData
 
 - *Type:* constructs.Construct
 
+Parent construct scope.
+
 ---
 
 ##### `id`<sup>Required</sup> <a name="id" id="aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStack.Initializer.parameter.id"></a>
 
 - *Type:* string
 
+Stack identifier.
+
 ---
 
 ##### `props`<sup>Required</sup> <a name="props" id="aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStack.Initializer.parameter.props"></a>
 
 - *Type:* <a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStackProps">RDSDatabaseRunningScheduleStackProps</a>
+
+Stack configuration.
 
 ---
 
@@ -1090,6 +1106,8 @@ Whether termination protection is enabled for this stack.
 
 ### RDSDatabaseRunningSchedulerProps <a name="RDSDatabaseRunningSchedulerProps" id="aws-rds-database-running-scheduler.RDSDatabaseRunningSchedulerProps"></a>
 
+Properties for the RDS database running scheduler construct.
+
 #### Initializer <a name="Initializer" id="aws-rds-database-running-scheduler.RDSDatabaseRunningSchedulerProps.Initializer"></a>
 
 ```typescript
@@ -1102,11 +1120,11 @@ const rDSDatabaseRunningSchedulerProps: RDSDatabaseRunningSchedulerProps = { ...
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningSchedulerProps.property.secrets">secrets</a></code> | <code><a href="#aws-rds-database-running-scheduler.Secrets">Secrets</a></code> | *No description.* |
-| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningSchedulerProps.property.targetResource">targetResource</a></code> | <code><a href="#aws-rds-database-running-scheduler.TargetResource">TargetResource</a></code> | *No description.* |
-| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningSchedulerProps.property.enableScheduling">enableScheduling</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningSchedulerProps.property.startSchedule">startSchedule</a></code> | <code><a href="#aws-rds-database-running-scheduler.Schedule">Schedule</a></code> | *No description.* |
-| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningSchedulerProps.property.stopSchedule">stopSchedule</a></code> | <code><a href="#aws-rds-database-running-scheduler.Schedule">Schedule</a></code> | *No description.* |
+| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningSchedulerProps.property.secrets">secrets</a></code> | <code><a href="#aws-rds-database-running-scheduler.Secrets">Secrets</a></code> | Secret references used by the Lambda workflow. |
+| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningSchedulerProps.property.targetResource">targetResource</a></code> | <code><a href="#aws-rds-database-running-scheduler.TargetResource">TargetResource</a></code> | Tag filter to select RDS instances and clusters. |
+| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningSchedulerProps.property.enableScheduling">enableScheduling</a></code> | <code>boolean</code> | Enables or disables both start and stop schedules. |
+| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningSchedulerProps.property.startSchedule">startSchedule</a></code> | <code><a href="#aws-rds-database-running-scheduler.Schedule">Schedule</a></code> | Optional override for start schedule cron configuration. |
+| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningSchedulerProps.property.stopSchedule">stopSchedule</a></code> | <code><a href="#aws-rds-database-running-scheduler.Schedule">Schedule</a></code> | Optional override for stop schedule cron configuration. |
 
 ---
 
@@ -1118,6 +1136,8 @@ public readonly secrets: Secrets;
 
 - *Type:* <a href="#aws-rds-database-running-scheduler.Secrets">Secrets</a>
 
+Secret references used by the Lambda workflow.
+
 ---
 
 ##### `targetResource`<sup>Required</sup> <a name="targetResource" id="aws-rds-database-running-scheduler.RDSDatabaseRunningSchedulerProps.property.targetResource"></a>
@@ -1127,6 +1147,8 @@ public readonly targetResource: TargetResource;
 ```
 
 - *Type:* <a href="#aws-rds-database-running-scheduler.TargetResource">TargetResource</a>
+
+Tag filter to select RDS instances and clusters.
 
 ---
 
@@ -1138,6 +1160,8 @@ public readonly enableScheduling: boolean;
 
 - *Type:* boolean
 
+Enables or disables both start and stop schedules.
+
 ---
 
 ##### `startSchedule`<sup>Optional</sup> <a name="startSchedule" id="aws-rds-database-running-scheduler.RDSDatabaseRunningSchedulerProps.property.startSchedule"></a>
@@ -1147,6 +1171,8 @@ public readonly startSchedule: Schedule;
 ```
 
 - *Type:* <a href="#aws-rds-database-running-scheduler.Schedule">Schedule</a>
+
+Optional override for start schedule cron configuration.
 
 ---
 
@@ -1158,9 +1184,13 @@ public readonly stopSchedule: Schedule;
 
 - *Type:* <a href="#aws-rds-database-running-scheduler.Schedule">Schedule</a>
 
+Optional override for stop schedule cron configuration.
+
 ---
 
 ### RDSDatabaseRunningScheduleStackProps <a name="RDSDatabaseRunningScheduleStackProps" id="aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStackProps"></a>
+
+Properties for the RDS database running schedule stack.
 
 #### Initializer <a name="Initializer" id="aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStackProps.Initializer"></a>
 
@@ -1186,11 +1216,11 @@ const rDSDatabaseRunningScheduleStackProps: RDSDatabaseRunningScheduleStackProps
 | <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStackProps.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method to use while deploying this stack. |
 | <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStackProps.property.tags">tags</a></code> | <code>{[ key: string ]: string}</code> | Tags that will be applied to the Stack. |
 | <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStackProps.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether to enable termination protection for this stack. |
-| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStackProps.property.secrets">secrets</a></code> | <code><a href="#aws-rds-database-running-scheduler.Secrets">Secrets</a></code> | *No description.* |
-| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStackProps.property.targetResource">targetResource</a></code> | <code><a href="#aws-rds-database-running-scheduler.TargetResource">TargetResource</a></code> | *No description.* |
-| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStackProps.property.enableScheduling">enableScheduling</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStackProps.property.startSchedule">startSchedule</a></code> | <code><a href="#aws-rds-database-running-scheduler.Schedule">Schedule</a></code> | *No description.* |
-| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStackProps.property.stopSchedule">stopSchedule</a></code> | <code><a href="#aws-rds-database-running-scheduler.Schedule">Schedule</a></code> | *No description.* |
+| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStackProps.property.secrets">secrets</a></code> | <code><a href="#aws-rds-database-running-scheduler.Secrets">Secrets</a></code> | Secret references required by the scheduler construct. |
+| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStackProps.property.targetResource">targetResource</a></code> | <code><a href="#aws-rds-database-running-scheduler.TargetResource">TargetResource</a></code> | Tag filter used to select target RDS resources. |
+| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStackProps.property.enableScheduling">enableScheduling</a></code> | <code>boolean</code> | Enables or disables schedule creation. |
+| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStackProps.property.startSchedule">startSchedule</a></code> | <code><a href="#aws-rds-database-running-scheduler.Schedule">Schedule</a></code> | Optional cron configuration for start operations. |
+| <code><a href="#aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStackProps.property.stopSchedule">stopSchedule</a></code> | <code><a href="#aws-rds-database-running-scheduler.Schedule">Schedule</a></code> | Optional cron configuration for stop operations. |
 
 ---
 
@@ -1446,6 +1476,8 @@ public readonly secrets: Secrets;
 
 - *Type:* <a href="#aws-rds-database-running-scheduler.Secrets">Secrets</a>
 
+Secret references required by the scheduler construct.
+
 ---
 
 ##### `targetResource`<sup>Required</sup> <a name="targetResource" id="aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStackProps.property.targetResource"></a>
@@ -1455,6 +1487,8 @@ public readonly targetResource: TargetResource;
 ```
 
 - *Type:* <a href="#aws-rds-database-running-scheduler.TargetResource">TargetResource</a>
+
+Tag filter used to select target RDS resources.
 
 ---
 
@@ -1466,6 +1500,8 @@ public readonly enableScheduling: boolean;
 
 - *Type:* boolean
 
+Enables or disables schedule creation.
+
 ---
 
 ##### `startSchedule`<sup>Optional</sup> <a name="startSchedule" id="aws-rds-database-running-scheduler.RDSDatabaseRunningScheduleStackProps.property.startSchedule"></a>
@@ -1475,6 +1511,8 @@ public readonly startSchedule: Schedule;
 ```
 
 - *Type:* <a href="#aws-rds-database-running-scheduler.Schedule">Schedule</a>
+
+Optional cron configuration for start operations.
 
 ---
 
@@ -1486,9 +1524,13 @@ public readonly stopSchedule: Schedule;
 
 - *Type:* <a href="#aws-rds-database-running-scheduler.Schedule">Schedule</a>
 
+Optional cron configuration for stop operations.
+
 ---
 
 ### Schedule <a name="Schedule" id="aws-rds-database-running-scheduler.Schedule"></a>
+
+Cron schedule settings for EventBridge Scheduler.
 
 #### Initializer <a name="Initializer" id="aws-rds-database-running-scheduler.Schedule.Initializer"></a>
 
@@ -1502,10 +1544,10 @@ const schedule: Schedule = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-rds-database-running-scheduler.Schedule.property.timezone">timezone</a></code> | <code>aws-cdk-lib.TimeZone</code> | *No description.* |
-| <code><a href="#aws-rds-database-running-scheduler.Schedule.property.hour">hour</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-rds-database-running-scheduler.Schedule.property.minute">minute</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-rds-database-running-scheduler.Schedule.property.week">week</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-rds-database-running-scheduler.Schedule.property.timezone">timezone</a></code> | <code>aws-cdk-lib.TimeZone</code> | Time zone used to interpret cron fields. |
+| <code><a href="#aws-rds-database-running-scheduler.Schedule.property.hour">hour</a></code> | <code>string</code> | Hour field in cron expression. |
+| <code><a href="#aws-rds-database-running-scheduler.Schedule.property.minute">minute</a></code> | <code>string</code> | Minute field in cron expression. |
+| <code><a href="#aws-rds-database-running-scheduler.Schedule.property.week">week</a></code> | <code>string</code> | Weekday field in cron expression. |
 
 ---
 
@@ -1517,6 +1559,8 @@ public readonly timezone: TimeZone;
 
 - *Type:* aws-cdk-lib.TimeZone
 
+Time zone used to interpret cron fields.
+
 ---
 
 ##### `hour`<sup>Optional</sup> <a name="hour" id="aws-rds-database-running-scheduler.Schedule.property.hour"></a>
@@ -1526,6 +1570,8 @@ public readonly hour: string;
 ```
 
 - *Type:* string
+
+Hour field in cron expression.
 
 ---
 
@@ -1537,6 +1583,8 @@ public readonly minute: string;
 
 - *Type:* string
 
+Minute field in cron expression.
+
 ---
 
 ##### `week`<sup>Optional</sup> <a name="week" id="aws-rds-database-running-scheduler.Schedule.property.week"></a>
@@ -1547,9 +1595,13 @@ public readonly week: string;
 
 - *Type:* string
 
+Weekday field in cron expression.
+
 ---
 
 ### Secrets <a name="Secrets" id="aws-rds-database-running-scheduler.Secrets"></a>
+
+Secret names required by the scheduler workflow.
 
 #### Initializer <a name="Initializer" id="aws-rds-database-running-scheduler.Secrets.Initializer"></a>
 
@@ -1563,7 +1615,7 @@ const secrets: Secrets = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-rds-database-running-scheduler.Secrets.property.slackSecretName">slackSecretName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-rds-database-running-scheduler.Secrets.property.slackSecretName">slackSecretName</a></code> | <code>string</code> | Name of the Slack API secret in AWS Secrets Manager. |
 
 ---
 
@@ -1575,9 +1627,13 @@ public readonly slackSecretName: string;
 
 - *Type:* string
 
+Name of the Slack API secret in AWS Secrets Manager.
+
 ---
 
 ### TargetResource <a name="TargetResource" id="aws-rds-database-running-scheduler.TargetResource"></a>
+
+Tag filter used to discover target RDS resources.
 
 #### Initializer <a name="Initializer" id="aws-rds-database-running-scheduler.TargetResource.Initializer"></a>
 
@@ -1591,8 +1647,8 @@ const targetResource: TargetResource = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-rds-database-running-scheduler.TargetResource.property.tagKey">tagKey</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-rds-database-running-scheduler.TargetResource.property.tagValues">tagValues</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#aws-rds-database-running-scheduler.TargetResource.property.tagKey">tagKey</a></code> | <code>string</code> | Tag key used for resource discovery. |
+| <code><a href="#aws-rds-database-running-scheduler.TargetResource.property.tagValues">tagValues</a></code> | <code>string[]</code> | Tag values matched by the scheduler target query. |
 
 ---
 
@@ -1604,6 +1660,8 @@ public readonly tagKey: string;
 
 - *Type:* string
 
+Tag key used for resource discovery.
+
 ---
 
 ##### `tagValues`<sup>Required</sup> <a name="tagValues" id="aws-rds-database-running-scheduler.TargetResource.property.tagValues"></a>
@@ -1613,6 +1671,8 @@ public readonly tagValues: string[];
 ```
 
 - *Type:* string[]
+
+Tag values matched by the scheduler target query.
 
 ---
 

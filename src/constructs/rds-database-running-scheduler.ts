@@ -8,31 +8,66 @@ import { Secret } from 'aws-cdk-lib/aws-secretsmanager';
 import { Construct } from 'constructs';
 import { RunningScheduleFunction } from '../funcs/running-schedule-function';
 
+/**
+ * Cron schedule settings for EventBridge Scheduler.
+ */
 export interface Schedule {
+  /** Time zone used to interpret cron fields. */
   readonly timezone: TimeZone;
+  /** Minute field in cron expression. */
   readonly minute?: string;
+  /** Hour field in cron expression. */
   readonly hour?: string;
+  /** Weekday field in cron expression. */
   readonly week?: string;
 }
 
+/**
+ * Tag filter used to discover target RDS resources.
+ */
 export interface TargetResource {
+  /** Tag key used for resource discovery. */
   readonly tagKey: string;
+  /** Tag values matched by the scheduler target query. */
   readonly tagValues: string[];
 }
 
+/**
+ * Secret names required by the scheduler workflow.
+ */
 export interface Secrets {
+  /** Name of the Slack API secret in AWS Secrets Manager. */
   readonly slackSecretName: string;
 }
 
+/**
+ * Properties for the RDS database running scheduler construct.
+ */
 export interface RDSDatabaseRunningSchedulerProps {
+  /** Tag filter to select RDS instances and clusters. */
   readonly targetResource: TargetResource;
+  /** Enables or disables both start and stop schedules. */
   readonly enableScheduling?: boolean;
+  /** Secret references used by the Lambda workflow. */
   readonly secrets: Secrets;
+  /** Optional override for stop schedule cron configuration. */
   readonly stopSchedule?: Schedule;
+  /** Optional override for start schedule cron configuration. */
   readonly startSchedule?: Schedule;
 }
 
+/**
+ * CDK construct that provisions a durable Lambda workflow and EventBridge
+ * schedules to start/stop tagged RDS databases and clusters.
+ */
 export class RDSDatabaseRunningScheduler extends Construct {
+  /**
+   * Creates a scheduler for tagged RDS resources.
+   *
+   * @param scope Parent construct scope.
+   * @param id Construct identifier.
+   * @param props Scheduler configuration.
+   */
   constructor(scope: Construct, id: string, props: RDSDatabaseRunningSchedulerProps) {
     super(scope, id);
 
