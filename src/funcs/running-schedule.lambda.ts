@@ -18,6 +18,7 @@ import {
 } from '@aws-sdk/client-resource-groups-tagging-api';
 import { WebClient } from '@slack/web-api';
 import { secretFetcher } from 'aws-lambda-secret-fetcher';
+import { SafeEnvGetter } from 'safe-env-getter';
 
 const STATE_LIST = [
   { name: 'AVAILABLE', emoji: '🤩', state: 'available' },
@@ -175,17 +176,12 @@ export const handler = withDurableExecution(
     if (!params?.TagKey || !params?.TagValues || !params?.Mode) {
       throw new Error('Invalid event: Params.TagKey, Params.TagValues, Params.Mode are required.');
     }
-    const slackSecretName = process.env.SLACK_SECRET_NAME;
-    if (!slackSecretName) {
-      throw new Error('missing environment variable SLACK_SECRET_NAME.');
-    }
+    // safe get Secrets name from environment variable
+    const slackSecretName = SafeEnvGetter.getEnv('SLACK_SECRET_NAME');
+
     const slackSecretValue = await context.step('fetch-slack-secret', async () => {
       return secretFetcher.getSecretValue<SlackSecret>(slackSecretName);
     });
-
-    if (!slackSecretValue?.token || !slackSecretValue?.channel) {
-      throw new Error('Slack secret must contain token and channel.');
-    }
 
     const targetResources = await context.step('get-resources', async () => {
       const client = new ResourceGroupsTaggingAPIClient({});
