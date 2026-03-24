@@ -70,6 +70,18 @@ interface SlackSecret {
 }
 
 /**
+ * Processing result for a single RDS resource.
+ */
+interface ProcessingResult {
+  resource: string;
+  status: string;
+  account: string;
+  region: string;
+  identifier: string;
+  type: 'db' | 'cluster';
+}
+
+/**
  * Parses an RDS ARN and extracts targeting metadata.
  *
  * @param arn Full RDS resource ARN.
@@ -90,7 +102,7 @@ const parseArn = (arn: string): TargetInfo => {
  * Converts a raw RDS status into a display-friendly label for Slack.
  *
  * @param current Current RDS status string.
- * @returns Emoji and name pair when a known status is found.
+ * @returns Emoji and name pair when a known status is found, otherwise `undefined`.
  */
 const getStateDisplay = (current: string): { emoji: string; name: string } | undefined => {
   const found = STATE_LIST.find((s) => s.state === current);
@@ -113,7 +125,7 @@ const processing = async (
   context: DurableContext,
   targetResource: string,
   mode: 'Start' | 'Stop',
-): Promise<{ resource: string; status: string; account: string; region: string; identifier: string; type: 'db' | 'cluster' }> => {
+): Promise<ProcessingResult> => {
   const target = await context.step('get-identifier', async () => parseArn(targetResource));
 
   const rds = new RDSClient({});
@@ -211,6 +223,10 @@ const processing = async (
 /**
  * Scheduled Lambda handler that finds tagged RDS resources, applies
  * start/stop actions, and posts progress/results to Slack.
+ *
+ * @param event Scheduler event payload containing tag filters and operation mode.
+ * @param context Durable execution context from the durable execution SDK.
+ * @returns Processed resource count and per-resource results.
  */
 export const handler = withDurableExecution(
   async (event: ScheduleEvent, context: DurableContext) => {
