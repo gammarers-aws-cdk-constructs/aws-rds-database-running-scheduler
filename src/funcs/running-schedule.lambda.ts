@@ -20,11 +20,17 @@ import { WebClient } from '@slack/web-api';
 import { secretFetcher } from 'aws-lambda-secret-fetcher';
 import { SafeEnvGetter } from 'safe-env-getter';
 
+/**
+ * Canonical status labels and emojis used in Slack notifications.
+ */
 const STATE_LIST = [
   { name: 'AVAILABLE', emoji: '🤩', state: 'available' },
   { name: 'STOPPED', emoji: '😴', state: 'stopped' },
 ] as const;
 
+/**
+ * RDS statuses that indicate an in-progress transition.
+ */
 const TRANSITIONING_STATES = [
   'starting',
   'configuring-enhanced-monitoring',
@@ -33,6 +39,9 @@ const TRANSITIONING_STATES = [
   'stopping',
 ] as const;
 
+/**
+ * Event payload for scheduled start/stop execution.
+ */
 interface ScheduleEvent {
   Params: {
     TagKey: string;
@@ -41,6 +50,9 @@ interface ScheduleEvent {
   };
 }
 
+/**
+ * Parsed metadata for an RDS resource ARN.
+ */
 interface TargetInfo {
   targetResource: string;
   identifier: string;
@@ -49,11 +61,20 @@ interface TargetInfo {
   region: string;
 }
 
+/**
+ * Secret shape used to access Slack Web API.
+ */
 interface SlackSecret {
   token: string;
   channel: string;
 }
 
+/**
+ * Parses an RDS ARN and extracts targeting metadata.
+ *
+ * @param arn Full RDS resource ARN.
+ * @returns Parsed resource information used by the workflow.
+ */
 const parseArn = (arn: string): TargetInfo => {
   const parts = arn.split(':');
   return {
@@ -65,12 +86,29 @@ const parseArn = (arn: string): TargetInfo => {
   };
 };
 
+/**
+ * Converts a raw RDS status into a display-friendly label for Slack.
+ *
+ * @param current Current RDS status string.
+ * @returns Emoji and name pair when a known status is found.
+ */
 const getStateDisplay = (current: string): { emoji: string; name: string } | undefined => {
   const found = STATE_LIST.find((s) => s.state === current);
   return found ? { emoji: found.emoji, name: found.name } : undefined;
 };
 
 
+/**
+ * Processes one RDS resource until it reaches a stable state.
+ *
+ * The function polls status, triggers start/stop when needed, and waits while
+ * the resource is transitioning.
+ *
+ * @param context Durable execution context.
+ * @param targetResource Target RDS resource ARN.
+ * @param mode Requested operation mode.
+ * @returns Final processing result including status and resource metadata.
+ */
 const processing = async (
   context: DurableContext,
   targetResource: string,
@@ -170,6 +208,10 @@ const processing = async (
   }
 };
 
+/**
+ * Scheduled Lambda handler that finds tagged RDS resources, applies
+ * start/stop actions, and posts progress/results to Slack.
+ */
 export const handler = withDurableExecution(
   async (event: ScheduleEvent, context: DurableContext) => {
     const params = event.Params;
